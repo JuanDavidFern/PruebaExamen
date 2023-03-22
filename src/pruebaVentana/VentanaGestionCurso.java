@@ -47,6 +47,8 @@ public class VentanaGestionCurso extends JPanel {
 	private JButton btnNewButton_3;
 	private JButton btnNewButton_4;
 	private JPasswordField passwordField_1;
+	private JButton btnconfoto;
+	private JButton btnNewButton_5;
 
 	/**
 	 * Create the frame.
@@ -225,14 +227,46 @@ public class VentanaGestionCurso extends JPanel {
 		gbc_passwordField_1.gridy = 10;
 		add(passwordField_1, gbc_passwordField_1);
 		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
-		gbc_btnNewButton_4.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_4.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_4.gridx = 1;
 		gbc_btnNewButton_4.gridy = 11;
 		add(btnNewButton_4, gbc_btnNewButton_4);
+		
+		btnNewButton_5 = creaBoton("", "confirm.png", "");
+		GridBagConstraints gbc_btnNewButton_5 = new GridBagConstraints();
+		gbc_btnNewButton_5.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_5.gridx = 1;
+		gbc_btnNewButton_5.gridy = 12;
+		add(btnNewButton_5, gbc_btnNewButton_5);
+		
 
-		llenarJcb();
+
+//		llenarJcb();
 
 	}
+	
+	private JButton creaBoton(String titulo, String icono, String toolTip) {
+        JButton jbt = new JButton();
+        
+        jbt.setText(titulo);
+        jbt.setToolTipText(toolTip);
+        
+        jbt.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("Has hecho clic en el botón: \"" + toolTip + "\"");
+            }
+        });
+        
+        try {
+        	jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));  
+          } catch (Exception ex) {
+        	  ex.printStackTrace();
+          }
+        return jbt;
+	}
+	
+	
 	
 	public boolean esCorreo(String correo) {
         Pattern patron = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}");
@@ -243,6 +277,7 @@ public class VentanaGestionCurso extends JPanel {
 
 	private void validation() {
 		String str = passwordField.getText();
+		str.trim();
 		int contMayus = 0, contMinus = 0, contNum = 0, contNoAlfa = 0;
 		String str1[] = str.split("[ ]{1,}");
 		for (int i = 0; i < str1.length; i++) {
